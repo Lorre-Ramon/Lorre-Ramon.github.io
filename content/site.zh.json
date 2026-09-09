@@ -1,0 +1,209 @@
+{
+  "meta": {
+    "lang": "zh",
+    "title": "施博轩",
+    "description": "数据科学。卡内基梅隆大学，2026 年 12 月。预测、因果推断与应用机器学习。"
+  },
+  "profile": {
+    "name": "施博轩",
+    "tagline": "数据科学。卡内基梅隆大学，2026 年 12 月。",
+    "bio": [
+      "我构建能经受生产环境考验的模型——覆盖三千个成本中心的预算预测、基于竞价数据的营收诊断，以及监管能读懂的信用评分。",
+      "最近在做 FIND 访得——一个实习匹配平台，主要想看看自己把整套技术栈跑起来时，会在哪里出问题。"
+    ],
+    "location": "匹兹堡，美国",
+    "email": "eamesshi@gmail.com",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Lorre-Ramon"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/eames-shi"
+      },
+      {
+        "label": "Email",
+        "url": "mailto:eamesshi@gmail.com"
+      }
+    ]
+  },
+  "education": [
+    {
+      "id": "cmu",
+      "school": "卡内基梅隆大学",
+      "location": "匹兹堡，美国",
+      "degree": "信息系统管理硕士 — 商业智能与数据分析",
+      "date": "2026 年 12 月毕业",
+      "detail": "GPA 3.88 / 4.0",
+      "coursework": [
+        "深度学习入门",
+        "A/B Testing",
+        "因果推断",
+        "非结构化数据分析",
+        "高级商业分析"
+      ]
+    },
+    {
+      "id": "hit",
+      "school": "哈尔滨工业大学",
+      "location": "威海，中国",
+      "degree": "智能会计学士",
+      "date": "2025 年 6 月毕业",
+      "detail": "GPA 90.25 / 100 · 国家奖学金",
+      "coursework": [
+        "数据库",
+        "计量经济学",
+        "运筹学",
+        "概率论",
+        "应用统计"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "amgen",
+      "company": "安进",
+      "team": "人工智能与数据",
+      "role": "应用人工智能组，数据科学实习生",
+      "location": "远程，美国",
+      "date": "2026 年 5 月 – 2026 年 8 月",
+      "start": "2026-05",
+      "end": "2026-08",
+      "highlights": [
+        "构建生产级旅行与娱乐预算预测模型，利用 40 个月的历史数据向财务部门提供覆盖约 3,000 成本中心的预测；与基准模型相比降低约 8% RMSE 和约 17% WAPE，与人工规划相比两项指标同时降低约 33%。",
+        "开发基于阈值的双 XGBoost 混合模型：对高支出预算采用标准 L2 损失函数，对小且周期性的预算采用带符号分类器的 log-L2 损失函数，以在广泛的预算范围内保持准确性；使用 Tree SHAP 向财务部门解释每个预测。"
+      ],
+      "stack": [
+        "Python",
+        "XGBoost",
+        "Tree SHAP",
+        "时间序列预测"
+      ]
+    },
+    {
+      "id": "apple",
+      "company": "苹果",
+      "team": "苹果广告",
+      "role": "大中华区数据洞见组，数据科学实习生",
+      "location": "上海，中国",
+      "date": "2025 年 2 月 – 2025 年 7 月",
+      "start": "2025-02",
+      "end": "2025-07",
+      "highlights": [
+        "诊断某亚太地区广告业务收入流失问题，基于 SQL（Athena, Snowflake）和 PySpark 分析营收漏斗和竞价数据；发现约 6% 的搜索未展示广告，并通过需求信号评分挖掘高价值关键词；据此驱动关键词覆盖和品牌词保护等策略，预计带来约 15% 的年营收增长；分三阶段向管理层汇报项目进展。",
+        "基于 Scikit-learn 构建客户价值模型，利用人口统计、漏斗指标等约 25 个特征，通过线性回归估算营收增长空间；使用 Matplotlib 和 Seaborn 可视化关键洞察，并向销售团队交付客户排序列表，将推介成功率提高约 10%。"
+      ],
+      "stack": [
+        "SQL",
+        "Athena",
+        "Snowflake",
+        "PySpark",
+        "Scikit-learn"
+      ]
+    },
+    {
+      "id": "deloitte",
+      "company": "德勤",
+      "team": "德勤风驭",
+      "role": "智慧股票组，金融科技数据科学实习生",
+      "location": "上海，中国",
+      "date": "2024 年 7 月 – 2024 年 10 月",
+      "start": "2024-07",
+      "end": "2024-10",
+      "highlights": [
+        "为市场监控产品设计 Python 和 SQL 的 ELTL 管线，每日处理 4,000 只股票、各 150 多个指标；开发可复用的多线程装饰器实现数据库并发查询（提速 5 倍）。",
+        "基于 Python（NumPy, Pandas）构建覆盖 18 个行业的信用评分模型，采用遗传算法优化，并加入定制化约束条件（特征类别基数限制、权重限制、符号违规惩罚）以保证模型可解释性；以 Somers' D 作为目标函数，使用 15% 数据进行验证，缩短项目交付周期 10 人天。"
+      ],
+      "stack": [
+        "Python",
+        "SQL",
+        "NumPy",
+        "Pandas",
+        "遗传算法"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "find",
+      "name": "FIND 访得",
+      "subtitle": "实习匹配平台",
+      "role": "独立开发者",
+      "url": "https://find-internship.org/",
+      "date": "2025 年 11 月 – 至今",
+      "status": "active",
+      "highlights": [
+        "开发基于 ML/AI 的实习匹配平台，Beta 测试两周内获 57 名用户；构建 66 个爬虫，用于收集与维护约 19,000 条活跃实习信息；设计基于 Prometheus 和 Grafana 的监控看板，跟踪系统健康、关键指标，并监测数据漂移与模型性能漂移。",
+        "在简历读取、岗位匹配解释、求职信生成功能中调用 DeepSeek API，采用多层安全防护（提示词注入防护、个人信息脱敏）；设计双语语义匹配算法，融合 BGE-M3 编码器、pgvector 及 sigmoid 函数以优化匹配分数。",
+        "设计并运行着陆页的随机对照试验（50/50 随机分组，预定义平均处理效应和异质性处理效应，平衡性检查，统计功效分析），以研究是否预览模板匹配结果能提高简历上传意愿；效应方向为正且不存在隐私顾虑的调节作用，已发布预览模板的上手引导。"
+      ],
+      "stack": [
+        "Python",
+        "PostgreSQL",
+        "pgvector",
+        "BGE-M3",
+        "DeepSeek",
+        "Prometheus",
+        "Grafana"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "id": "esg",
+      "title": "ESG 报告中图像对企业 ESG 绩效的影响",
+      "role": "数据科学研究员",
+      "advisor": "哈尔滨工业大学（威海）张琦教授指导",
+      "url": "https://github.com/Lorre-Ramon",
+      "date": "2023 年 11 月 – 2025 年 6 月",
+      "highlights": [
+        "构建多模态分析管线，处理 11,000 余份企业 ESG 报告：自动解析 PDF 以提取文本与图像，利用 OpenAI CLIP 计算图文语义相似度。",
+        "基于 GLS 随机效应回归（Stata），发现图像密度与 ESG 绩效之间的 U 型关系（拐点约 2.3 张图片/页），并受图文一致性的正向调节作用。"
+      ],
+      "stack": [
+        "OpenAI CLIP",
+        "Stata",
+        "GLS",
+        "多模态"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "group": "编程工具",
+      "items": [
+        "Python",
+        "SQL",
+        "Java"
+      ]
+    },
+    {
+      "group": "工具与平台",
+      "items": [
+        "Snowflake",
+        "PySpark",
+        "PostgreSQL",
+        "Scikit-learn",
+        "PyTorch",
+        "NumPy",
+        "Pandas",
+        "Matplotlib",
+        "Seaborn",
+        "Tableau",
+        "Git"
+      ]
+    },
+    {
+      "group": "分析方法",
+      "items": [
+        "信用评分建模",
+        "机器学习",
+        "深度学习",
+        "自然语言处理",
+        "因果推断",
+        "A/B 实验"
+      ]
+    }
+  ]
+}

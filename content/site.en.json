@@ -1,0 +1,209 @@
+{
+  "meta": {
+    "lang": "en",
+    "title": "Boxuan Shi",
+    "description": "Data scientist. Carnegie Mellon, Dec 2026. Forecasting, causal inference, and applied ML."
+  },
+  "profile": {
+    "name": "Boxuan Shi",
+    "tagline": "Data scientist. Carnegie Mellon, Dec 2026.",
+    "bio": [
+      "I build models meant to survive contact with production — budget forecasting across three thousand cost centers, revenue diagnostics on auction data, credit scoring that a regulator could read.",
+      "Lately I have been building FIND, an internship matching platform, mostly to find out what breaks when you run the whole stack yourself."
+    ],
+    "location": "Pittsburgh, PA",
+    "email": "eamesshi@gmail.com",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Lorre-Ramon"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/eames-shi"
+      },
+      {
+        "label": "Email",
+        "url": "mailto:eamesshi@gmail.com"
+      }
+    ]
+  },
+  "education": [
+    {
+      "id": "cmu",
+      "school": "Carnegie Mellon University",
+      "location": "Pittsburgh, PA, United States",
+      "degree": "Master of Information Systems Management — Business Intelligence and Data Analytics",
+      "date": "Dec. 2026",
+      "detail": "GPA 3.88 / 4.0",
+      "coursework": [
+        "Unstructured Data Analysis",
+        "A/B Testing",
+        "Introduction to Deep Learning",
+        "Causal Inference"
+      ]
+    },
+    {
+      "id": "hit",
+      "school": "Harbin Institute of Technology",
+      "location": "Weihai, China",
+      "degree": "Bachelor of Mgmt. in Digital Accounting",
+      "date": "Jul. 2025",
+      "detail": "GPA 90.25 / 100 · National Scholarship (Top 0.2%)",
+      "coursework": [
+        "Database",
+        "Econometrics",
+        "Operation Research",
+        "Probability Theory",
+        "Applied Statistics"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "amgen",
+      "company": "Amgen",
+      "team": "AI & Data",
+      "role": "Data Scientist Intern, Applied AI Team",
+      "location": "Remote, US",
+      "date": "May 2026 – Aug. 2026",
+      "start": "2026-05",
+      "end": "2026-08",
+      "highlights": [
+        "Built a production-bound Travel & Entertainment budget forecasting model for the Finance organization across ~3,000 cost centers with 40 months of history; reduced forecast error ~8% on RMSE and ~17% on WAPE vs. baseline, and ~33% vs. human planners on both metrics.",
+        "Engineered a threshold-based hybrid of two XGBoost models — standard L2 for high-spend transactions, and a log-L2 objective with sign classifier for the small, intermittent ones — to hold accuracy across a wide spend range; applied Tree SHAP to make each forecast explainable to Finance stakeholders."
+      ],
+      "stack": [
+        "Python",
+        "XGBoost",
+        "Tree SHAP",
+        "Forecasting"
+      ]
+    },
+    {
+      "id": "apple",
+      "company": "Apple",
+      "team": "Advertising",
+      "role": "Data Scientist Intern, Greater China Region Data Insight Team",
+      "location": "Shanghai, China",
+      "date": "Feb. 2025 – Jul. 2025",
+      "start": "2025-02",
+      "end": "2025-07",
+      "highlights": [
+        "Diagnosed revenue leakage in an APAC Ads storefront by analyzing the revenue funnel and auction-level bid data with SQL (Athena, Snowflake) and PySpark; identified ~6% unfilled searches and surfaced high-potential keywords by scoring demand signals. Contributed to keyword coverage and brand protection strategies projected to drive ~15% uplift in annual revenue; reported to management across two milestones.",
+        "Built a client-value model using linear regression with Scikit-learn on ~25 demographic and funnel features to estimate revenue headroom; visualized key insights with Matplotlib and Seaborn and delivered ranked client lists to Sales, improving pitch success rate by ~10%."
+      ],
+      "stack": [
+        "SQL",
+        "Athena",
+        "Snowflake",
+        "PySpark",
+        "Scikit-learn"
+      ]
+    },
+    {
+      "id": "deloitte",
+      "company": "Deloitte",
+      "team": "iBond",
+      "role": "Fintech Data Scientist Intern, Intelligent Stock Team",
+      "location": "Shanghai, China",
+      "date": "Jul. 2024 – Oct. 2024",
+      "start": "2024-07",
+      "end": "2024-10",
+      "highlights": [
+        "Designed a Python/SQL ELTL pipeline processing 4,000+ stocks across 150 metrics daily for a market-monitor product; built a reusable multithreading decorator for concurrent query execution (5x speedup).",
+        "Built credit scoring models in Python (NumPy, Pandas) for 18 industries using Genetic Algorithm optimization with custom constraints — category-level feature cardinality, weight caps, and a penalty for sign violations — to ensure interpretability; used Somers' D as the objective function, saving 10 person-days in project delivery."
+      ],
+      "stack": [
+        "Python",
+        "SQL",
+        "NumPy",
+        "Pandas",
+        "Genetic Algorithm"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "find",
+      "name": "FIND",
+      "subtitle": "Internship Matching Platform",
+      "role": "Independent Developer",
+      "url": "https://find-internship.org/",
+      "date": "Nov. 2025 – Present",
+      "status": "active",
+      "highlights": [
+        "Developed an ML/AI-driven internship matching platform; gained 57 users within two weeks of beta. Built 66 crawlers monitoring ~19,000 active internship opportunities, with Prometheus and Grafana dashboards tracking system health, key metrics, and data drift.",
+        "Integrated the DeepSeek LLM for resume parsing, job match reasoning, and cover letter generation — with prompt-injection protection and PII masking. Designed a bilingual semantic matching algorithm using a BGE-M3 encoder and pgvector, with a sigmoid to curve the matching score.",
+        "Designed and ran a randomized landing-page experiment (50/50 block randomization, pre-specified ATE and HTE, covariate balance checks, power analysis) testing whether previewing sample output raises resume-upload intent; the effect was directionally positive with no moderation by privacy concern, and the sample-first onboarding flow shipped."
+      ],
+      "stack": [
+        "Python",
+        "PostgreSQL",
+        "pgvector",
+        "BGE-M3",
+        "DeepSeek",
+        "Prometheus",
+        "Grafana"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "id": "esg",
+      "title": "Impact of Image in ESG Reports on ESG Performance",
+      "role": "ML Researcher",
+      "advisor": "Supervised by Zhang, Qi at Harbin Institute of Technology, Weihai",
+      "url": "https://github.com/Lorre-Ramon",
+      "date": "Nov. 2023 – Jun. 2025",
+      "highlights": [
+        "Built a multimodal analysis pipeline processing 11,000+ corporate ESG reports: automated PDF parsing for text and image extraction, and image-text semantic similarity computed with OpenAI CLIP.",
+        "Discovered a U-shaped relationship between image density and ESG performance (inflection ~2.3 images/page), amplified by image-text alignment, using GLS regression with random effects in Stata."
+      ],
+      "stack": [
+        "OpenAI CLIP",
+        "Stata",
+        "GLS",
+        "Multimodal"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "group": "Languages",
+      "items": [
+        "Python",
+        "SQL",
+        "Java",
+        "Claude Code",
+        "Codex"
+      ]
+    },
+    {
+      "group": "Tools",
+      "items": [
+        "Snowflake",
+        "PySpark",
+        "PostgreSQL",
+        "Scikit-learn",
+        "PyTorch",
+        "NumPy",
+        "Pandas",
+        "Matplotlib",
+        "Seaborn",
+        "Git"
+      ]
+    },
+    {
+      "group": "Analytics & Methodology",
+      "items": [
+        "Causal Inference",
+        "Data Analysis",
+        "ELTL",
+        "Machine Learning",
+        "Natural Language Processing",
+        "Optimization"
+      ]
+    }
+  ]
+}

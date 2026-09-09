@@ -1,0 +1,21 @@
+{
+  "_comment": "Reading shelf. Add an object per book; it renders on the page AND becomes cat-able at /shelf/<id> in the terminal. Both locales required.",
+  "items": [
+    {
+      "id": "example-entry",
+      "year": 2026,
+      "title": {
+        "en": "Replace me",
+        "zh": "替换我"
+      },
+      "author": {
+        "en": "Author Name",
+        "zh": "作者"
+      },
+      "note": {
+        "en": "One or two lines on what stuck with you. This entry is a template — delete it.",
+        "zh": "一两句读后感。这是模板条目，请删除。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+/* ===========================================================================
+   layout.css — nav, sections, cards, footer
+   Breakpoints mirror Apple's real ladder: 734 / 1068 / 1441.
+   =========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--hairline);
+}
+.section:first-of-type { border-top: none; }
+.section--subtle { background: var(--bg-subtle); }
+
+.section__head { margin-bottom: 48px; }
+.section__eyebrow {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  font-weight: var(--fw-medium);
+}
+
+/* --- Nav ------------------------------------------------------------------ */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.nav[data-scrolled="true"] { border-bottom-color: var(--hairline); }
+
+.nav__inner {
+  display: flex; align-items: center; gap: 24px;
+  height: 52px;
+}
+.nav__brand {
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-right: auto;
+}
+.nav__brand:hover { text-decoration: none; color: var(--text); }
+
+.nav__links { display: flex; gap: 26px; align-items: center; }
+.nav__link {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
+}
+.nav__link:hover { color: var(--text); text-decoration: none; }
+
+.nav__tools { display: flex; gap: 8px; align-items: center; }
+
+.icon-btn {
+  appearance: none; border: 1px solid var(--hairline);
+  background: transparent; color: var(--text-secondary);
+  font-family: var(--font-text);
+  font-size: var(--fs-caption);
+  height: 28px; min-width: 28px; padding-inline: 9px;
+  border-radius: var(--radius-button);
+  cursor: pointer; display: inline-flex;
+  align-items: center; justify-content: center;
+  transition: color var(--dur-micro) var(--ease),
+              border-color var(--dur-micro) var(--ease),
+              background-color var(--dur-micro) var(--ease);
+}
+.icon-btn:hover { color: var(--text); border-color: var(--text-tertiary); }
+.icon-btn[aria-pressed="true"] { color: var(--text); border-color: var(--text); }
+
+/* --- Buttons -------------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-text);
+  font-size: var(--fs-body);
+  line-height: 1.1765;
+  letter-spacing: var(--ls-body);
+  font-weight: var(--fw-regular);
+  padding: 11px 21px;                 /* verbatim from Apple */
+  border-radius: var(--radius-button);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--dur-micro) var(--ease),
+              color var(--dur-micro) var(--ease),
+              border-color var(--dur-micro) var(--ease);
+}
+.btn--primary { background: var(--accent); color: #fff; }
+.btn--primary:hover { background: var(--accent-hover); color: #fff; text-decoration: none; }
+.btn--secondary { border-color: var(--accent); color: var(--accent); background: transparent; }
+.btn--secondary:hover { background: var(--accent); color: #fff; text-decoration: none; }
+
+/* --- Hero ----------------------------------------------------------------- */
+.hero {
+  padding-block: 132px 108px;
+  border-top: none;
+}
+.hero__name { margin-bottom: 20px; }
+.hero__tagline {
+  max-width: 34ch;
+  margin-bottom: 34px;
+  text-wrap: balance;   /* keeps "Dec 2026" from splitting across lines */
+}
+.hero__actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* --- Prose ---------------------------------------------------------------- */
+.prose { max-width: 62ch; }
+.prose p { color: var(--text-secondary); }
+
+/* --- Timeline (experience) ------------------------------------------------ */
+.timeline { display: grid; gap: 0; }
+
+.entry {
+  display: grid;
+  grid-template-columns: 172px 1fr;
+  gap: 32px;
+  padding-block: 40px;
+  border-top: 1px solid var(--hairline);
+}
+.entry:first-child { border-top: none; padding-top: 0; }
+
+.entry__meta { padding-top: 4px; }
+.entry__date {
+  font-size: var(--fs-caption);
+  color: var(--text-tertiary);
+  letter-spacing: var(--ls-caption);
+}
+.entry__org {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-h4);
+  line-height: var(--lh-h4);
+  margin-bottom: 4px;
+}
+.entry__role { font-size: var(--fs-body); color: var(--text-secondary); margin-bottom: 16px; }
+.entry__list { display: grid; gap: 12px; }
+.entry__list li {
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 18px;
+}
+.entry__list li::before {
+  content: ""; position: absolute;
+  left: 0; top: 0.62em;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--text-tertiary);
+}
+
+/* --- Tag chips ------------------------------------------------------------ */
+.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+.tag {
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-caption);
+  color: var(--text-secondary);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-button);
+  padding: 4px 11px;
+  white-space: nowrap;
+}
+
+/* --- Cards ---------------------------------------------------------------- */
+.cards { display: grid; gap: 20px; grid-template-columns: repeat(2, 1fr); }
+.cards--single { grid-template-columns: 1fr; }
+
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-panel);
+  padding: 32px;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.card:hover { border-color: var(--text-tertiary); }
+.card__head {
+  display: flex; align-items: baseline;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 6px;
+}
+.card__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-h3);
+  line-height: var(--lh-h3);
+}
+.card__sub { color: var(--text-secondary); font-size: var(--fs-body); }
+.card__date { font-size: var(--fs-caption); color: var(--text-tertiary); margin-bottom: 18px; }
+
+/* --- Skills --------------------------------------------------------------- */
+.skills { display: grid; gap: 32px; }
+.skills__group-name {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+  font-weight: var(--fw-medium);
+}
+
+/* --- Shelf ---------------------------------------------------------------- */
+.shelf { display: grid; gap: 0; }
+.shelf__item {
+  display: grid; grid-template-columns: 64px 1fr; gap: 24px;
+  padding-block: 24px;
+  border-top: 1px solid var(--hairline);
+}
+.shelf__item:first-child { border-top: none; padding-top: 0; }
+.shelf__year { font-size: var(--fs-caption); color: var(--text-tertiary); padding-top: 3px; }
+.shelf__title { font-weight: var(--fw-semibold); }
+.shelf__author { color: var(--text-tertiary); font-size: var(--fs-small); }
+.shelf__note { color: var(--text-secondary); margin-top: 6px; }
+
+/* --- Contact -------------------------------------------------------------- */
+.contact__links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+
+/* --- Footer --------------------------------------------------------------- */
+.footer {
+  border-top: 1px solid var(--hairline);
+  padding-block: 40px 56px;
+  background: var(--bg-subtle);
+}
+.footer__inner {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}
+.footer__copy { font-size: var(--fs-caption); color: var(--text-tertiary); }
+
+/* The easter-egg entry point: discoverable if you're looking, invisible
+   otherwise. Sits in the footer as a live-looking shell prompt. */
+.footer__terminal {
+  appearance: none; background: transparent;
+  border: none; cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--text-tertiary);
+  padding: 6px 8px; border-radius: 6px;
+  display: inline-flex; align-items: center; gap: 2px;
+  transition: color var(--dur-fast) var(--ease);
+}
+.footer__terminal:hover { color: var(--accent); }
+.footer__caret {
+  display: inline-block;
+  width: 7px; height: 1.05em;
+  background: currentColor;
+  vertical-align: text-bottom;
+  animation: caret-blink 1.06s steps(1, end) infinite;
+}
+@keyframes caret-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+/* --- Scroll reveal --------------------------------------------------------
+   Scoped to .js-reveal, which main.js adds to <html> ONLY once it has an
+   IntersectionObserver ready to undim these again. Without JS — or without an
+   observer — the class never lands and the content is simply visible, rather
+   than stranded at opacity 0 forever. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity var(--dur-slow) var(--ease),
+                transform var(--dur-slow) var(--ease);
+  }
+  .js-reveal .reveal.is-visible { opacity: 1; transform: none; }
+}
+
+/* ===========================================================================
+   Responsive — Apple's ladder
+   =========================================================================== */
+
+/* Medium: 735–1068px → 692px container */
+@media (max-width: 1068px) {
+  .container { max-width: var(--container-md); }
+  .cards { grid-template-columns: 1fr; }
+}
+
+/* Small: ≤734px */
+@media (max-width: 734px) {
+  :root {
+    --fs-hero: 40px;
+    --fs-h1: 32px;
+    --fs-h2: 28px;
+    --fs-h3: 21px;
+    --section-y: var(--section-y-sm);
+  }
+  .hero { padding-block: 72px 56px; }
+  .hero__tagline { max-width: 24ch; }
+
+  .entry { grid-template-columns: 1fr; gap: 12px; }
+  .entry__meta { padding-top: 0; }
+
+  .card { padding: 24px; }
+  .nav__links { display: none; }         /* brand + tools only on phones */
+  .footer__inner { justify-content: center; text-align: center; }
+}
