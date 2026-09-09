@@ -208,12 +208,17 @@
 /* --- Shelf ---------------------------------------------------------------- */
 .shelf { display: grid; gap: 0; }
 .shelf__item {
-  display: grid; grid-template-columns: 64px 1fr; gap: 24px;
+  /* Wide enough for an era rather than a year — the shelf spans "c. 380 BCE"
+     to 2007, and at 64px the older entries wrapped onto two lines. */
+  display: grid; grid-template-columns: 96px 1fr; gap: 24px;
   padding-block: 24px;
   border-top: 1px solid var(--hairline);
 }
 .shelf__item:first-child { border-top: none; padding-top: 0; }
-.shelf__year { font-size: var(--fs-caption); color: var(--text-tertiary); padding-top: 3px; }
+.shelf__year {
+  font-size: var(--fs-caption); color: var(--text-tertiary);
+  padding-top: 3px; white-space: nowrap;
+}
 .shelf__title { font-weight: var(--fw-semibold); }
 .shelf__author { color: var(--text-tertiary); font-size: var(--fs-small); }
 .shelf__note { color: var(--text-secondary); margin-top: 6px; }
@@ -294,6 +299,9 @@
 
   .entry { grid-template-columns: 1fr; gap: 12px; }
   .entry__meta { padding-top: 0; }
+
+  .shelf__item { grid-template-columns: 1fr; gap: 6px; }
+  .shelf__year { padding-top: 0; }
 
   .card { padding: 24px; }
   .nav__links { display: none; }         /* brand + tools only on phones */

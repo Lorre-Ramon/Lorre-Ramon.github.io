@@ -1,20 +1,84 @@
 {
-  "_comment": "Reading shelf. Add an object per book; it renders on the page AND becomes cat-able at /shelf/<id> in the terminal. Both locales required.",
+  "_comment": "Reading shelf. Add an object per book; it renders on the page AND becomes cat-able at /shelf/<id> in the terminal. Both locales required. `year` is the work's original publication, not when it was read.",
   "items": [
     {
-      "id": "example-entry",
-      "year": 2026,
+      "id": "negotiation-genius",
+      "year": 2007,
       "title": {
-        "en": "Replace me",
-        "zh": "替换我"
+        "en": "Negotiation Genius",
+        "zh": "谈判天才"
       },
       "author": {
-        "en": "Author Name",
-        "zh": "作者"
+        "en": "Deepak Malhotra & Max H. Bazerman",
+        "zh": "迪帕克·马尔霍特拉、马克斯·巴泽曼"
       },
       "note": {
-        "en": "One or two lines on what stuck with you. This entry is a template — delete it.",
-        "zh": "一两句读后感。这是模板条目，请删除。"
+        "en": "Harvard Business School's negotiation course in book form: investigative negotiation, and what to do when you hold no leverage at all.",
+        "zh": "哈佛商学院谈判课的书面版：调查式谈判，以及在毫无筹码时该怎么做。"
+      }
+    },
+    {
+      "id": "death-of-socrates",
+      "year": "c. 380 BCE",
+      "title": {
+        "en": "The Death of Socrates",
+        "zh": "苏格拉底之死"
+      },
+      "author": {
+        "en": "Plato",
+        "zh": "柏拉图"
+      },
+      "note": {
+        "en": "The four dialogues around the trial and execution — Euthyphro, Apology, Crito, Phaedo.",
+        "zh": "围绕审判与赴死的四篇对话：《欧绪弗洛》《申辩》《克力同》《斐多》。"
+      }
+    },
+    {
+      "id": "zeng-guofan",
+      "year": 1990,
+      "title": {
+        "en": "Zeng Guofan",
+        "zh": "曾国藩"
+      },
+      "author": {
+        "en": "Tang Haoming",
+        "zh": "唐浩明"
+      },
+      "note": {
+        "en": "A three-volume historical novel following Zeng from the raising of the Xiang Army through the late Qing.",
+        "zh": "三卷本历史小说，写曾国藩从组建湘军到晚清仕途的一生。"
+      }
+    },
+    {
+      "id": "ting-jing",
+      "year": "c. 1870",
+      "title": {
+        "en": "Tingjing — The Classic of Endurance",
+        "zh": "挺经"
+      },
+      "author": {
+        "en": "Attributed to Zeng Guofan",
+        "zh": "旧题曾国藩"
+      },
+      "note": {
+        "en": "Eighteen short chapters on endurance and self-discipline. Traditionally attributed to Zeng, though the attribution is disputed.",
+        "zh": "十八章短论，讲隐忍与自律。旧题曾国藩所作，其真伪历来存疑。"
+      }
+    },
+    {
+      "id": "chuanxilu",
+      "year": 1518,
+      "title": {
+        "en": "Instructions for Practical Living",
+        "zh": "传习录"
+      },
+      "author": {
+        "en": "Wang Yangming",
+        "zh": "王阳明"
+      },
+      "note": {
+        "en": "The core record of Wang Yangming's teaching, and the source of the unity of knowing and acting.",
+        "zh": "阳明心学的核心语录，知行合一的出处。"
       }
     }
   ]

@@ -22,10 +22,14 @@ Last Updated: 2026-09-09
 - Verified: 15/15 VFS unit assertions, 12/12 final regression checks, responsive
   at true 390/834/1440, dark mode, both locales.
 
+### Deployed
+Live at https://lorre-ramon.github.io — Pages source `main` / root, HTTPS
+enforced, `404.html` returns a real 404. Verified in production: ES module
+MIME types correct, content renders from JSON, `#terminal` deep link works cold.
+
 ### Not done
-- Not pushed. No git remote; the `gh` token for `Lorre-Ramon` is expired.
-- `content/shelf.json` holds one template entry that needs replacing.
-- No analytics, no custom domain.
+- Shelf notes are descriptive (what each book is), not personal reactions.
+- No analytics, no custom domain. Repo has no description or homepage set.
 
 ## Architecture Decisions
 
