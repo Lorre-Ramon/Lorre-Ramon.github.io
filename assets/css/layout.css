@@ -208,20 +208,59 @@
 /* --- Shelf ---------------------------------------------------------------- */
 .shelf { display: grid; gap: 0; }
 .shelf__item {
-  /* Wide enough for an era rather than a year — the shelf spans "c. 380 BCE"
-     to 2007, and at 64px the older entries wrapped onto two lines. */
-  display: grid; grid-template-columns: 96px 1fr; gap: 24px;
   padding-block: 24px;
   border-top: 1px solid var(--hairline);
+  max-width: 62ch;
 }
 .shelf__item:first-child { border-top: none; padding-top: 0; }
-.shelf__year {
-  font-size: var(--fs-caption); color: var(--text-tertiary);
-  padding-top: 3px; white-space: nowrap;
-}
 .shelf__title { font-weight: var(--fw-semibold); }
 .shelf__author { color: var(--text-tertiary); font-size: var(--fs-small); }
 .shelf__note { color: var(--text-secondary); margin-top: 6px; }
+
+/* --- Albums ---------------------------------------------------------------
+   Cover art is the content here, so the grid is sized by the artwork and the
+   captions stay quiet beneath it. */
+.albums {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px 24px;
+}
+
+.album { display: block; color: inherit; }
+.album:hover { text-decoration: none; color: inherit; }
+
+.album__art {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--bg-subtle);
+  border: 1px solid var(--hairline);
+  margin-bottom: 12px;
+  transition: transform var(--dur-base) var(--ease);
+}
+.album__art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .album:hover .album__art { transform: scale(1.02); }
+}
+
+.album__work {
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  letter-spacing: var(--ls-small);
+  font-weight: var(--fw-semibold);
+  margin-bottom: 3px;
+  /* Reserve two lines so the performer credits sit on a common baseline across
+     a row, whether the work title wraps or not. */
+  min-height: calc(2 * var(--lh-small) * var(--fs-small));
+}
+.album__performer {
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+  letter-spacing: var(--ls-caption);
+  color: var(--text-tertiary);
+}
 
 /* --- Contact -------------------------------------------------------------- */
 .contact__links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
@@ -283,6 +322,7 @@
 @media (max-width: 1068px) {
   .container { max-width: var(--container-md); }
   .cards { grid-template-columns: 1fr; }
+  .albums { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* Small: ≤734px */
@@ -300,10 +340,9 @@
   .entry { grid-template-columns: 1fr; gap: 12px; }
   .entry__meta { padding-top: 0; }
 
-  .shelf__item { grid-template-columns: 1fr; gap: 6px; }
-  .shelf__year { padding-top: 0; }
 
   .card { padding: 24px; }
+  .albums { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
   .nav__links { display: none; }         /* brand + tools only on phones */
   .footer__inner { justify-content: center; text-align: center; }
 }

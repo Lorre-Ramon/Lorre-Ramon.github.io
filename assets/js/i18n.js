@@ -64,9 +64,9 @@ export async function loadContent(lang = current) {
         if (!r.ok) throw new Error(`site.${lang}.json → ${r.status}`);
         return r.json();
       }),
-      fetch('/content/shelf.json').then((r) => (r.ok ? r.json() : { items: [] })),
+      fetch('/content/shelf.json').then((r) => (r.ok ? r.json() : {})),
     ]);
-    return { ...site, shelf: shelf.items ?? [] };
+    return { ...site, shelf: shelf.books ?? [], music: shelf.music ?? [] };
   })();
 
   cache.set(lang, promise);

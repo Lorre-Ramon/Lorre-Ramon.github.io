@@ -31,6 +31,15 @@ MIME types correct, content renders from JSON, `#terminal` deep link works cold.
 - Shelf notes are descriptive (what each book is), not personal reactions.
 - No analytics, no custom domain. Repo has no description or homepage set.
 
+### Album art is hotlinked on purpose
+Cover images come from Apple's artwork CDN (`is1-ssl.mzstatic.com`) and each
+tile links to the release on Apple Music. They are copyrighted, so they are
+deliberately **not** committed to this public repo — shown in the context of a
+link to the record instead. Consequence: if Apple moves a URL, that tile loses
+its image. The layout reserves the square via `aspect-ratio`, so a missing
+cover degrades to its caption without shifting anything. URLs come from the
+iTunes Search API (no key); the exact command is in the README.
+
 ## Architecture Decisions
 
 - **Content as data, not markup.** Everything that grows lives in
@@ -93,7 +102,8 @@ MIME types correct, content renders from JSON, `#terminal` deep link works cold.
   inferior Latin.
 
 ## Quick Reference
-- Content: `content/site.en.json`, `content/site.zh.json`, `content/shelf.json`
+- Content: `content/site.en.json`, `content/site.zh.json`,
+  `content/shelf.json` (holds both `books[]` and `music[]`)
 - Tokens: `assets/css/tokens.css` (provenance in `architecture/design/design-system.md`)
 - Terminal: `assets/js/terminal/{index,shell,commands,vfs,ascii}.js`
 - VFS is built by `buildVFS(content, lang)` in `vfs.js` — the single-source-of-truth seam

@@ -25,7 +25,25 @@ and the résumé:
 |---|---|---|
 | A job | `content/site.en.json` + `content/site.zh.json` → `experience[]` | `#work`, `/work/<id>.md`, résumé |
 | A project | same files → `projects[]` | `#projects`, `/projects/<id>.md`, résumé |
-| A book | `content/shelf.json` → `items[]` | `#shelf`, `/shelf/<id>.md` |
+| A book | `content/shelf.json` → `books[]` | `#shelf`, `/shelf/<id>.md` |
+| A record | `content/shelf.json` → `music[]` | `#listening`, `/music/<id>.md` |
+
+### Album art
+
+Cover images are **hotlinked from Apple's artwork CDN**, not committed. They are
+copyrighted, so each tile links to the record on Apple Music — shown in the
+context of a link to the release rather than copied into a public repo. To add
+one, get the artwork URL and link from the iTunes Search API:
+
+```bash
+curl -s --get https://itunes.apple.com/search \
+  --data-urlencode "term=Mahler Symphony No 1 Abbado" \
+  --data-urlencode "entity=album" | python3 -m json.tool | less
+```
+
+Take `artworkUrl100`, swap `100x100bb` for `600x600bb`, and use
+`collectionViewUrl` as the link. If Apple ever moves a URL the tile degrades to
+its caption — the layout reserves the square, so nothing shifts.
 
 Both locale files must stay structurally identical — same keys, same `id`s. The
 renderer and the filesystem builder are locale-agnostic and assume that.

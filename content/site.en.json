@@ -1,14 +1,14 @@
 {
   "meta": {
     "lang": "en",
-    "title": "Boxuan Shi",
+    "title": "Eames",
     "description": "Data scientist. Carnegie Mellon, Dec 2026. Forecasting, causal inference, and applied ML."
   },
   "profile": {
     "name": "Boxuan Shi",
     "tagline": "Data scientist. Carnegie Mellon, Dec 2026.",
     "bio": [
-      "I build models meant to survive contact with production — budget forecasting across three thousand cost centers, revenue diagnostics on auction data, credit scoring that a regulator could read.",
+      "I build models meant to survive contact with production — budget forecasting across three thousand cost centers, revenue diagnostics on auction data, credit scoring that fits the business needs.",
       "Lately I have been building FIND, an internship matching platform, mostly to find out what breaks when you run the whole stack yourself."
     ],
     "location": "Pittsburgh, PA",

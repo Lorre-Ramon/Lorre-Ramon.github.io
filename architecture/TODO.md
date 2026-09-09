@@ -5,6 +5,7 @@ Last Updated: 2026-09-09
 - [ ] Rewrite the five shelf notes in your own voice — they currently describe
       what each book is, rather than what you took from it
 - [ ] Write `PROJECT.md` (human-only file; Claude is not to author it)
+- [ ] Push: the live site is still two commits behind
 
 ## Upcoming
 - [ ] Decide whether `boxuans@andrew.cmu.edu` should appear anywhere public — it
@@ -19,3 +20,4 @@ Last Updated: 2026-09-09
 ## Done
 - [x] Site built, verified, and deployed to https://lorre-ramon.github.io
 - [x] Shelf populated with five titles, bilingual
+- [x] Listening section: 8 recordings with cover art, bilingual

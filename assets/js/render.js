@@ -156,16 +156,44 @@ export function renderShelf(node, items, lang) {
   }
   items.forEach((book) => {
     const row = el('div', 'shelf__item reveal');
-    row.appendChild(el('div', 'shelf__year', String(book.year ?? '')));
-
-    const body = el('div');
-    body.appendChild(el('div', 'shelf__title', book.title?.[lang] ?? book.title?.en ?? ''));
-    body.appendChild(el('div', 'shelf__author', book.author?.[lang] ?? book.author?.en ?? ''));
+    row.appendChild(el('div', 'shelf__title', book.title?.[lang] ?? book.title?.en ?? ''));
+    row.appendChild(el('div', 'shelf__author', book.author?.[lang] ?? book.author?.en ?? ''));
     const note = book.note?.[lang] ?? book.note?.en;
-    if (note) body.appendChild(el('p', 'shelf__note', note));
-
-    row.appendChild(body);
+    if (note) row.appendChild(el('p', 'shelf__note', note));
     node.appendChild(row);
+  });
+}
+
+/**
+ * Album grid. Cover art is hotlinked from Apple's CDN and each tile links to
+ * the record: the images are copyrighted, so they are shown in the context of
+ * a link to the release rather than copied into this repo.
+ */
+export function renderMusic(node, items, lang) {
+  if (!node) return;
+  clear(node);
+  items.forEach((rec) => {
+    const tile = el('a', 'album reveal');
+    tile.href = rec.url || '#';
+    tile.rel = 'noopener';
+    if (rec.url) tile.target = '_blank';
+
+    const frame = el('div', 'album__art');
+    if (rec.art) {
+      const img = el('img');
+      img.src = rec.art;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.width = 300; img.height = 300;   // reserve the box, so no layout shift
+      // The cover is decoration; the title beneath already names the record.
+      img.alt = '';
+      frame.appendChild(img);
+    }
+    tile.appendChild(frame);
+
+    tile.appendChild(el('div', 'album__work', rec.work?.[lang] ?? rec.work?.en ?? ''));
+    tile.appendChild(el('div', 'album__performer', rec.performer?.[lang] ?? rec.performer?.en ?? ''));
+    node.appendChild(tile);
   });
 }
 
@@ -189,5 +217,6 @@ export function renderAll(content, lang) {
   renderResearch(at('research-list'), content.research ?? [], lang);
   renderSkills(at('skills-list'), content.skills ?? []);
   renderShelf(at('shelf-list'), content.shelf ?? [], lang);
+  renderMusic(at('music-list'), content.music ?? [], lang);
   renderContact(at('contact-links'), content.profile?.links ?? []);
 }

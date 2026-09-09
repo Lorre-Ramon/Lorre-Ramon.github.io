@@ -94,7 +94,18 @@ export function buildVFS(content, lang) {
     const title = b.title?.[lang] ?? b.title?.en ?? b.id;
     const author = b.author?.[lang] ?? b.author?.en ?? '';
     const note = b.note?.[lang] ?? b.note?.en ?? '';
-    add(shelf, file(`${b.id}.md`, `${title}\n${'='.repeat(40)}\n${author} · ${b.year ?? ''}\n\n${note}`));
+    add(shelf, file(`${b.id}.md`, `${title}\n${'='.repeat(40)}\n${author}\n\n${note}`));
+  });
+
+  const music = add(root, dir('music'));
+  (content.music ?? []).forEach((m) => {
+    const work = m.work?.[lang] ?? m.work?.en ?? m.id;
+    const performer = m.performer?.[lang] ?? m.performer?.en ?? '';
+    add(music, file(`${m.id}.md`, [
+      work,
+      '='.repeat(48),
+      wrap('Performer', performer) + wrap('Album', m.album) + wrap('Listen', m.url),
+    ].join('\n')));
   });
 
   add(root, file('skills.txt',

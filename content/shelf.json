@@ -1,9 +1,8 @@
 {
-  "_comment": "Reading shelf. Add an object per book; it renders on the page AND becomes cat-able at /shelf/<id> in the terminal. Both locales required. `year` is the work's original publication, not when it was read.",
-  "items": [
+  "_comment": "Shelf content. `books` and `music` each render on the page and become cat-able under /shelf and /music in the terminal. Album art is hotlinked from Apple's CDN and each entry links to the record — the images are copyrighted and are deliberately not committed to this repo.",
+  "books": [
     {
       "id": "negotiation-genius",
-      "year": 2007,
       "title": {
         "en": "Negotiation Genius",
         "zh": "谈判天才"
@@ -19,7 +18,6 @@
     },
     {
       "id": "death-of-socrates",
-      "year": "c. 380 BCE",
       "title": {
         "en": "The Death of Socrates",
         "zh": "苏格拉底之死"
@@ -35,7 +33,6 @@
     },
     {
       "id": "zeng-guofan",
-      "year": 1990,
       "title": {
         "en": "Zeng Guofan",
         "zh": "曾国藩"
@@ -51,7 +48,6 @@
     },
     {
       "id": "ting-jing",
-      "year": "c. 1870",
       "title": {
         "en": "Tingjing — The Classic of Endurance",
         "zh": "挺经"
@@ -67,7 +63,6 @@
     },
     {
       "id": "chuanxilu",
-      "year": 1518,
       "title": {
         "en": "Instructions for Practical Living",
         "zh": "传习录"
@@ -80,6 +75,120 @@
         "en": "The core record of Wang Yangming's teaching, and the source of the unity of knowing and acting.",
         "zh": "阳明心学的核心语录，知行合一的出处。"
       }
+    }
+  ],
+  "music": [
+    {
+      "id": "mahler-1",
+      "work": {
+        "en": "Mahler — Symphony No. 1",
+        "zh": "马勒 — 第一交响曲"
+      },
+      "performer": {
+        "en": "Claudio Abbado · Berlin Philharmonic",
+        "zh": "阿巴多 · 柏林爱乐"
+      },
+      "album": "Mahler: Symphony No. 1",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/a7/76/6d/a7766dfc-d636-2e9d-b2a6-f53a94b2aa6f/00028943176927.rgb.jpg/600x600bb.jpg",
+      "url": "https://music.apple.com/us/album/mahler-symphony-no-1/1452377808?uo=4"
+    },
+    {
+      "id": "mahler-6",
+      "work": {
+        "en": "Mahler — Symphony No. 6",
+        "zh": "马勒 — 第六交响曲《悲剧》"
+      },
+      "performer": {
+        "en": "Claudio Abbado · Berlin Philharmonic",
+        "zh": "阿巴多 · 柏林爱乐"
+      },
+      "album": "Mahler: Symphony No. 6",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/73/0e/2d/730e2d6e-f6ef-9e87-3a14-2a671370e901/00028947755739.rgb.jpg/600x600bb.jpg",
+      "url": "https://music.apple.com/us/album/mahler-symphony-no-6/1452503818?uo=4"
+    },
+    {
+      "id": "carnaval",
+      "work": {
+        "en": "Saint-Saëns — Le Carnaval des animaux: XIII. Le Cygne",
+        "zh": "圣桑 — 动物狂欢节：第十三首《天鹅》"
+      },
+      "performer": {
+        "en": "Pascal Rogé · Charles Dutoit",
+        "zh": "帕斯卡尔·罗热 · 迪图瓦"
+      },
+      "album": "Saint-Saëns: Carnival of the Animals",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/69/2f/7b/692f7bd5-aef3-cca1-4b7e-a91ee475894a/00028941446022.rgb.jpg/600x600bb.jpg",
+      "url": "https://music.apple.com/us/album/saint-sa%C3%ABns-carnival-of-the-animals/1440765926?uo=4"
+    },
+    {
+      "id": "bruckner-8",
+      "work": {
+        "en": "Bruckner — Symphony No. 8",
+        "zh": "布鲁克纳 — 第八交响曲"
+      },
+      "performer": {
+        "en": "Herbert von Karajan · Vienna Philharmonic",
+        "zh": "卡拉扬 · 维也纳爱乐"
+      },
+      "album": "Bruckner: Symphony No. 8",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/10/09/72/10097219-b7c5-ee59-6034-45a3a57183b0/00028947905288.rgb.jpg/600x600bb.jpg",
+      "url": "https://music.apple.com/us/album/bruckner-symphony-no-8/1452226235?uo=4"
+    },
+    {
+      "id": "scriabin",
+      "work": {
+        "en": "Scriabin — Le Poème de l'extase, Op. 54",
+        "zh": "斯克里亚宾 — 狂喜之诗，作品 54"
+      },
+      "performer": {
+        "en": "Pierre Boulez · Chicago Symphony Orchestra",
+        "zh": "布列兹 · 芝加哥交响乐团"
+      },
+      "album": "Scriabin: Le Poème de l'extase, Piano Concerto & Prométhée",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/49/29/f7/4929f776-00be-1d01-3641-bbcf649d4859/00028945964720.rgb.jpg/600x600bb.jpg",
+      "url": "https://music.apple.com/us/album/scriabin-le-po%C3%A8me-de-lextase-piano-concerto-prom%C3%A9th%C3%A9e/1452205240?uo=4"
+    },
+    {
+      "id": "bolero",
+      "work": {
+        "en": "Ravel — Boléro, M. 81",
+        "zh": "拉威尔 — 波莱罗舞曲"
+      },
+      "performer": {
+        "en": "Herbert von Karajan · Berlin Philharmonic",
+        "zh": "卡拉扬 · 柏林爱乐"
+      },
+      "album": "Ravel: Boléro, M. 81 - Debussy: La mer, L. 109 - Mussorgsky: Pictures at an Exhibition",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/53/a9/67/53a967f5-c0be-322d-b568-a76c4ac0d651/15UMGIM06386.rgb.jpg/600x600bb.jpg",
+      "url": "https://music.apple.com/us/album/ravel-bol%C3%A9ro-m-81-debussy-la-mer-l-109-mussorgsky/968867217?uo=4"
+    },
+    {
+      "id": "clair-de-lune",
+      "work": {
+        "en": "Debussy — Suite bergamasque: III. Clair de lune",
+        "zh": "德彪西 — 贝加马斯克组曲：第三首《月光》"
+      },
+      "performer": {
+        "en": "Sviatoslav Richter",
+        "zh": "斯维亚托斯拉夫·里赫特"
+      },
+      "album": "Richter Plays Debussy (Live)",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/8c/d5/71/8cd57191-b887-68fd-63e2-7c0f7e424e1c/cover.jpg/600x600bb.jpg",
+      "url": "https://music.apple.com/us/album/richter-plays-debussy-live/1513150463?uo=4"
+    },
+    {
+      "id": "polovtsian",
+      "work": {
+        "en": "Borodin — Prince Igor: Polovtsian Dances",
+        "zh": "鲍罗丁 — 伊戈尔王：波洛维茨舞曲"
+      },
+      "performer": {
+        "en": "Herbert von Karajan · Berlin Philharmonic",
+        "zh": "卡拉扬 · 柏林爱乐"
+      },
+      "album": "Rimsky-Korsakov: Scheherazade - Borodin: Polovtsian Dances",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/42/78/bc/4278bc67-2c97-408b-9c86-5282cd237074/00028941906328.rgb.jpg/600x600bb.jpg",
+      "url": "https://music.apple.com/us/album/rimsky-korsakov-scheherazade-borodin-polovtsian-dances/1452212001?uo=4"
     }
   ]
 }

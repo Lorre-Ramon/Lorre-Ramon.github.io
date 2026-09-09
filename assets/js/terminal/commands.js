@@ -122,6 +122,10 @@ export const commands = {
     desc: { en: 'what I am reading', zh: '书架' },
     run: (ctx) => summarize(ctx, 'shelf'),
   },
+  music: {
+    desc: { en: 'what I am listening to', zh: '唱片' },
+    run: (ctx) => summarize(ctx, 'music'),
+  },
 
   resume: {
     desc: { en: 'open the resume (PDF)', zh: '打开简历 (PDF)' },
