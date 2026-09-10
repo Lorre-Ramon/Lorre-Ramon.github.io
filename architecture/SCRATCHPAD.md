@@ -16,9 +16,11 @@ Last Updated: 2026-09-09
   `navigator.language`.
 - Light/dark themes: system preference plus a manual toggle.
 - Terminal easter egg with all four entry points (footer glyph, backtick key,
-  Konami code, `#terminal` URL), 28 commands, tab completion, persisted history.
-- `resume.html` renders from the same content JSON; PDFs generated from it and
-  committed to `assets/resume/`.
+  Konami code, `#terminal` URL), tab completion, persisted history. Full-screen
+  since 2026-09-09, styled after ak.hypergryph.com/ama-10/devlog.
+- No résumé page: removed at the user's request, along with the PDFs and every
+  link to them. FIND's project copy still mentions "resume parsing" — that is
+  product description, not a link.
 - Verified: 15/15 VFS unit assertions, 12/12 final regression checks, responsive
   at true 390/834/1440, dark mode, both locales.
 
@@ -87,6 +89,22 @@ iTunes Search API (no key); the exact command is in the README.
 - **CSS transitions do not advance under `--virtual-time-budget`.** A property
   under transition reads at its start value forever, so a working theme toggle
   looks broken. Probe with a transition-free element to tell the two apart.
+
+- **Anchor jumps land on the section box, not the heading.** Each section has
+  `--section-y` of top padding, which showed as a large gap under the nav with
+  the previous section's band above it. Fixed with a deliberately negative
+  `scroll-margin-top: calc(-1 * var(--section-y))` that discounts the padding,
+  plus `scroll-padding-top: calc(var(--nav-h) + var(--anchor-gap))`.
+
+- **`requestAnimationFrame` is not guaranteed to fire when the page is not
+  producing frames.** The terminal used to add `is-open` and focus the input
+  inside a rAF; when it did not run, the overlay opened stuck at `opacity: 0`.
+  Forcing a reflow (`void el.offsetHeight`) gives the transition its start
+  value without depending on a frame.
+
+- **Headless Chrome does not repaint after a programmatic scroll**, so a
+  screenshot of a scrolled page comes back blank. Render the page in a sized
+  `<iframe>` and scroll that instead — iframes do repaint.
 
 - **Block ASCII art needs `line-height` near 1.** At the 1.55 used for prose the
   rows do not fuse and the banner reads as broken rubble.

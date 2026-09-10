@@ -32,10 +32,11 @@ function saveHistory(history) {
 }
 
 export class Shell {
-  constructor({ output, input, prompt, ctx }) {
+  constructor({ output, input, prompt, scroller, ctx }) {
     this.output = output;
     this.input = input;
     this.promptEl = prompt;
+    this.scrollerEl = scroller ?? output;
     this.ctxProvider = ctx;
 
     this.cwd = '/';
@@ -58,7 +59,7 @@ export class Shell {
   }
 
   renderPrompt() {
-    this.promptEl.textContent = `~${this.cwd === '/' ? '' : this.cwd} $`;
+    this.promptEl.textContent = this.cwd === '/' ? '>' : `${this.cwd} >`;
   }
 
   /* --- output ------------------------------------------------------------ */
@@ -78,7 +79,7 @@ export class Shell {
 
     const prompt = document.createElement('span');
     prompt.className = 'term__echo-prompt';
-    prompt.textContent = `~${this.cwd === '/' ? '' : this.cwd} $ `;
+    prompt.textContent = this.cwd === '/' ? '> ' : `${this.cwd} > `;
 
     const cmd = document.createElement('span');
     cmd.textContent = line;
@@ -93,8 +94,8 @@ export class Shell {
   }
 
   scrollToEnd() {
-    const scroller = this.output.parentElement ?? this.output;
-    scroller.scrollTop = scroller.scrollHeight;
+    const el = this.scrollerEl;
+    el.scrollTop = el.scrollHeight;
   }
 
   /* --- dispatch ---------------------------------------------------------- */

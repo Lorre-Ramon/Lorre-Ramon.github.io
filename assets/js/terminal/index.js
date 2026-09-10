@@ -39,6 +39,7 @@ export class Terminal {
       output: this.outputEl,
       input: this.inputEl,
       prompt: this.promptEl,
+      scroller: this.scroller,
       ctx: () => this.shellContext(),
     });
     this.shell.renderPrompt();
@@ -68,7 +69,8 @@ export class Terminal {
     try { localStorage.setItem(THEME_KEY, theme); } catch { /* non-fatal */ }
   }
 
-  /* --- DOM --------------------------------------------------------------- */
+  /* --- DOM ---------------------------------------------------------------
+     No window chrome: full viewport, one narrow column, nothing else. */
   buildDOM() {
     const root = document.createElement('div');
     root.className = 'term';
@@ -79,41 +81,24 @@ export class Terminal {
     root.hidden = true;
     root.dataset.termTheme = this.theme;
 
-    const panel = document.createElement('div');
-    panel.className = 'term__panel';
+    /* The only exit affordance for a pointer user, now that there is no
+       title bar. Esc does the same thing. */
+    const esc = document.createElement('button');
+    esc.type = 'button';
+    esc.className = 'term__esc';
+    esc.textContent = 'esc';
+    esc.setAttribute('aria-label', 'Close terminal');
+    esc.addEventListener('click', () => this.hide());
 
-    /* title bar */
-    const bar = document.createElement('div');
-    bar.className = 'term__bar';
-    const dots = document.createElement('div');
-    dots.className = 'term__dots';
-    ['r', 'y', 'g'].forEach((c) => {
-      const dot = document.createElement('span');
-      dot.className = `term__dot term__dot--${c}`;
-      dots.appendChild(dot);
-    });
-    const title = document.createElement('span');
-    title.className = 'term__title';
-    title.textContent = 'boxuan@github-pages — bx-sh';
-    const close = document.createElement('button');
-    close.type = 'button';
-    close.className = 'term__close';
-    close.setAttribute('aria-label', 'Close terminal');
-    close.textContent = 'esc';
-    close.addEventListener('click', () => this.hide());
-    bar.append(dots, title, close);
+    const col = document.createElement('div');
+    col.className = 'term__col';
 
-    /* scrolling output */
-    const scroller = document.createElement('div');
-    scroller.className = 'term__scroll';
     const output = document.createElement('div');
     output.className = 'term__output';
     output.setAttribute('role', 'log');
     output.setAttribute('aria-live', 'polite');
     output.setAttribute('aria-atomic', 'false');
-    scroller.appendChild(output);
 
-    /* input line */
     const inputRow = document.createElement('form');
     inputRow.className = 'term__inputline';
     inputRow.addEventListener('submit', (e) => e.preventDefault());
@@ -130,11 +115,11 @@ export class Terminal {
     input.spellcheck = false;
     inputRow.append(prompt, input);
 
-    /* Mobile affordance: typing shell commands on a phone is miserable, so
-       the common ones are one tap away. */
+    /* Typing shell commands on a phone is miserable, so the common ones stay
+       one tap away. */
     const chips = document.createElement('div');
     chips.className = 'term__chips';
-    ['help', 'whoami', 'work', 'projects', 'neofetch', 'clear', 'exit'].forEach((name) => {
+    ['help', 'whoami', 'work', 'projects', 'music', 'neofetch', 'clear', 'exit'].forEach((name) => {
       const chip = document.createElement('button');
       chip.type = 'button';
       chip.className = 'term__chip';
@@ -146,12 +131,16 @@ export class Terminal {
       chips.appendChild(chip);
     });
 
-    panel.append(bar, scroller, inputRow, chips);
-    root.appendChild(panel);
+    col.append(output, inputRow, chips);
+    root.append(esc, col);
 
-    // Clicking the backdrop (but not the panel) dismisses.
+    // Clicking the empty ground focuses the prompt rather than dismissing —
+    // with no panel edge, a click-outside-to-close would fire constantly.
     root.addEventListener('mousedown', (e) => {
-      if (e.target === root) this.hide();
+      if (e.target === root || e.target === col) {
+        e.preventDefault();
+        this.inputEl.focus();
+      }
     });
 
     document.body.appendChild(root);
@@ -160,7 +149,7 @@ export class Terminal {
     this.outputEl = output;
     this.inputEl = input;
     this.promptEl = prompt;
-    this.scroller = scroller;
+    this.scroller = root;
   }
 
   /* --- context for commands --------------------------------------------- */
@@ -244,10 +233,13 @@ export class Terminal {
       history.pushState(null, '', HASH);
     }
 
-    requestAnimationFrame(() => {
-      this.root.classList.add('is-open');
-      this.inputEl.focus();
-    });
+    // Force a reflow so the opacity transition has a start value to animate
+    // from, rather than waiting on requestAnimationFrame. rAF is not
+    // guaranteed to fire when the page isn't producing frames, and if it
+    // doesn't, the overlay opens stuck at opacity 0 and unfocused.
+    void this.root.offsetHeight;
+    this.root.classList.add('is-open');
+    this.inputEl.focus();
 
     if (!this.booted) { this.boot(konami); this.booted = true; }
     else if (konami) this.shell.print(konamiLine(getLang()), 'muted');
@@ -277,9 +269,9 @@ export class Terminal {
     this.shell.print(narrow() ? BANNER_COMPACT : BANNER, 'ascii');
 
     const lines = lang === 'zh'
-      ? ['bx-sh 1.0 — 纯静态，无后端。', "输入 'help' 查看命令，Esc 退出。"]
-      : ['bx-sh 1.0 — static, no backend.', "Type 'help' for commands. Esc to leave."];
-    if (konami) lines.push(konamiLine(lang));
+      ? ['> 正在读取 boxuan 档案…', "> 输入 'help' 查看命令 · esc 退出"]
+      : ['> accessing boxuan archive...', "> type 'help' for commands · esc to exit"];
+    if (konami) lines.push(`> ${konamiLine(lang)}`);
 
     if (reducedMotion()) {
       lines.forEach((line) => this.shell.print(line, 'muted'));

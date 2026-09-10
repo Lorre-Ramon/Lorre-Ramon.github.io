@@ -7,7 +7,11 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  scroll-padding-top: 76px;   /* clears the sticky nav on anchor jumps */
+  /* Anchor jumps land on the section box, which then has --section-y of its
+     own padding before the heading — that padding was the visible gap, with
+     the previous section's band still showing above it. Cancel the padding
+     via scroll-margin on the section, then leave nav height plus a gap. */
+  scroll-padding-top: calc(var(--nav-h) + var(--anchor-gap));
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -18,13 +18,12 @@ python3 -m http.server 8000
 ## Adding content
 
 Everything that grows lives in `content/`. Add an entry once and it appears in
-**three** places automatically — the page, the terminal's virtual filesystem,
-and the résumé:
+**both** places automatically — the page and the terminal's virtual filesystem:
 
 | To add | Edit | Appears at |
 |---|---|---|
-| A job | `content/site.en.json` + `content/site.zh.json` → `experience[]` | `#work`, `/work/<id>.md`, résumé |
-| A project | same files → `projects[]` | `#projects`, `/projects/<id>.md`, résumé |
+| A job | `content/site.en.json` + `content/site.zh.json` → `experience[]` | `#work`, `/work/<id>.md` |
+| A project | same files → `projects[]` | `#projects`, `/projects/<id>.md` |
 | A book | `content/shelf.json` → `books[]` | `#shelf`, `/shelf/<id>.md` |
 | A record | `content/shelf.json` → `music[]` | `#listening`, `/music/<id>.md` |
 
@@ -72,21 +71,6 @@ Ascending order of complexity, all still free:
 3. **A function on Vercel or Cloudflare Workers**, called from the page — only
    if a secret is needed at request time. Adds a second deploy target.
 
-## Résumé
-
-`resume.html` renders from the same content JSON, so it cannot drift from the
-site. It carries **no phone number** by construction. The committed PDFs in
-`assets/resume/` are generated from it:
-
-```bash
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-  --headless --no-pdf-header-footer --virtual-time-budget=9000 \
-  --print-to-pdf="assets/resume/boxuan-shi-resume.pdf" \
-  "http://localhost:8000/resume.html?lang=en"
-```
-
-Regenerate them after changing content, or they go stale.
-
 ## Design
 
 Tokens in `assets/css/tokens.css` were extracted from apple.com's production
@@ -105,7 +89,7 @@ and body line-height to `1.7`.
 ## Layout
 
 ```
-index.html · resume.html · 404.html
+index.html · 404.html
 assets/css/    tokens · base · layout · terminal
 assets/js/     i18n · render · main
 assets/js/terminal/   index (overlay) · shell (line editing) · commands · vfs · ascii

@@ -13,6 +13,10 @@
 .section {
   padding-block: var(--section-y);
   border-top: 1px solid var(--hairline);
+  /* Negative, deliberately: it discounts the section's own top padding so an
+     anchor lands on the heading. Tracks --section-y, so the small-screen
+     value follows automatically. */
+  scroll-margin-top: calc(-1 * var(--section-y));
 }
 .section:first-of-type { border-top: none; }
 .section--subtle { background: var(--bg-subtle); }
@@ -282,14 +286,20 @@
   transition: color var(--dur-fast) var(--ease);
 }
 .footer__terminal:hover { color: var(--accent); }
+/* Underline rather than block, matching the cursor inside the terminal it
+   opens. Blink timing is the reference's: 1.1s steps(1), resting at 0.65. */
 .footer__caret {
   display: inline-block;
-  width: 7px; height: 1.05em;
-  background: currentColor;
+  width: 0.55em;
+  border-bottom: 2px solid currentColor;
   vertical-align: text-bottom;
-  animation: caret-blink 1.06s steps(1, end) infinite;
+  animation: caret-blink 1.1s steps(1) infinite;
 }
-@keyframes caret-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+@keyframes caret-blink { 0%, 49% { opacity: 0.65; } 50%, 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__caret { animation: none; opacity: 0.65; }
+}
 
 /* --- Scroll reveal --------------------------------------------------------
    Scoped to .js-reveal, which main.js adds to <html> ONLY once it has an

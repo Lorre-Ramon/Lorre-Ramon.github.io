@@ -41,6 +41,8 @@
   --gutter: 22px;
   --section-y: 120px;
   --section-y-sm: 72px;
+  --nav-h: 52px;
+  --anchor-gap: 32px;
 
   /* --- Shape ------------------------------------------------------------- */
   --radius-button: 980px;     /* the pill, verbatim from Apple */

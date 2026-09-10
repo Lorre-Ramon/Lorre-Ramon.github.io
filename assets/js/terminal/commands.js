@@ -127,19 +127,6 @@ export const commands = {
     run: (ctx) => summarize(ctx, 'music'),
   },
 
-  resume: {
-    desc: { en: 'open the resume (PDF)', zh: '打开简历 (PDF)' },
-    run(ctx) {
-      // The page, not the PDF: it renders from the same content JSON, so it can
-      // never go stale, and it reads properly on a phone.
-      const url = '/resume.html';
-      window.open(url, '_blank', 'noopener');
-      return ctx.lang === 'zh'
-        ? `正在新标签页打开 ${url}（页面内可打印为 PDF）。`
-        : `Opening ${url} in a new tab — print to PDF from there.`;
-    },
-  },
-
   lang: {
     desc: { en: 'switch language: lang en | zh', zh: '切换语言：lang en | zh' },
     run(ctx, args) {
