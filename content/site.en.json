@@ -15,12 +15,12 @@
     "email": "eamesshi@gmail.com",
     "links": [
       {
-        "label": "GitHub",
-        "url": "https://github.com/Lorre-Ramon"
-      },
-      {
         "label": "LinkedIn",
         "url": "https://www.linkedin.com/in/eames-shi"
+      },
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Lorre-Ramon"
       },
       {
         "label": "Email",

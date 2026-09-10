@@ -18,14 +18,6 @@
 .section--subtle { background: var(--bg-subtle); }
 
 .section__head { margin-bottom: 48px; }
-.section__eyebrow {
-  font-size: var(--fs-caption);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin-bottom: 10px;
-  font-weight: var(--fw-medium);
-}
 
 /* --- Nav ------------------------------------------------------------------ */
 .nav {
