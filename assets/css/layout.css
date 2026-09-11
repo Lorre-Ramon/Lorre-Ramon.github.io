@@ -255,11 +255,11 @@
   right: 24px;
   bottom: 24px;
   z-index: 400;
-  max-width: 340px;
+  max-width: min(340px, calc(100vw - 32px));
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
-  padding: 16px 16px 16px 18px;
+  padding: 13px 14px 13px 18px;
   background: var(--bg-raised);
   border: 1px solid var(--hairline);
   border-radius: var(--radius-card);
@@ -286,15 +286,20 @@
 .hint__line {
   font-size: var(--fs-small);
   line-height: var(--lh-small);
-  color: var(--text);
+  color: var(--text-secondary);
+  white-space: nowrap;
 }
-.hint__attr {
+.hint__cmd {
   font-family: var(--font-mono);
-  font-size: var(--fs-caption);
-  color: var(--text-tertiary);
-  margin-top: 8px;
+  color: var(--text);
+  background: var(--bg-subtle);
+  border: 1px solid var(--hairline);
+  border-radius: 5px;
+  padding: 1px 6px;
+  margin-left: 6px;
+  white-space: nowrap;
 }
-.hint__body:hover .hint__attr { color: var(--accent); }
+.hint__body:hover .hint__cmd { color: var(--accent); border-color: var(--accent); }
 
 .hint__close {
   appearance: none;
@@ -302,7 +307,7 @@
   border: none;
   cursor: pointer;
   flex: none;
-  margin: -4px -4px 0 0;
+  margin: 0 -2px 0 0;
   padding: 4px;
   line-height: 1;
   font-size: var(--fs-caption);
@@ -405,5 +410,5 @@
   .nav__links { display: none; }         /* brand + tools only on phones */
   .footer__inner { justify-content: center; text-align: center; }
 
-  .hint { right: 12px; left: 12px; bottom: 12px; max-width: none; }
+  .hint { right: 12px; bottom: 12px; }
 }

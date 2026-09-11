@@ -31,31 +31,28 @@ const markShown = () => {
 };
 
 /* --- copy -----------------------------------------------------------------
-   The zh strings carry the Latin spelling too: a reader who only has 吉卜林
-   has no way to type the command. */
+   The command stays Latin in both locales — it is what gets typed. */
+const COMMAND = 'Kipling';
+
 const COPY = {
-  en: {
-    line: '“If you can keep your head when all about you / Are losing theirs and blaming it on you…”',
-    attr: '— Rudyard Kipling. Type his surname at the ~ $ prompt.',
-    close: 'Dismiss',
-  },
-  zh: {
-    line: '“如果周围的人都失去理智、并把过错推到你身上，而你仍能保持冷静……”',
-    attr: '— 鲁德亚德·吉卜林（Rudyard Kipling）。在 ~ $ 提示符后键入他的姓氏。',
-    close: '关闭',
-  },
+  en: { label: 'Try command:', close: 'Dismiss' },
+  zh: { label: '试试命令：', close: '关闭' },
 };
 
 const copyFor = (lang) => COPY[lang === 'zh' ? 'zh' : 'en'];
 
 /* --- console hint --------------------------------------------------------- */
 function logHint(lang) {
-  const c = copyFor(lang);
-  console.log(
-    `%c${c.line}\n%c${c.attr}`,
-    'font-style:italic;line-height:1.6',
-    'color:#86868b',
-  );
+  // The console keeps the longer form: it is the subtler of the three hints,
+  // and whoever opens devtools has gone looking.
+  const quote = lang === 'zh'
+    ? '“如果周围的人都失去理智、并把过错推到你身上，而你仍能保持冷静……”'
+    : '“If you can keep your head when all about you / Are losing theirs and blaming it on you…”';
+  const attr = lang === 'zh'
+    ? '— 鲁德亚德·吉卜林（Rudyard Kipling）。在 ~ $ 提示符后键入他的姓氏。'
+    : '— Rudyard Kipling. Type his surname at the ~ $ prompt.';
+  console.log(`%c${quote}\n%c${attr}`,
+    'font-style:italic;line-height:1.6', 'color:#86868b');
 }
 
 /* --- toast ---------------------------------------------------------------- */
@@ -74,13 +71,14 @@ function buildToast(lang) {
 
   const line = document.createElement('span');
   line.className = 'hint__line';
-  line.textContent = c.line;
+  line.textContent = c.label;
 
-  const attr = document.createElement('span');
-  attr.className = 'hint__attr';
-  attr.textContent = c.attr;
+  const cmd = document.createElement('code');
+  cmd.className = 'hint__cmd';
+  cmd.textContent = COMMAND;
 
-  body.append(line, document.createElement('br'), attr);
+  line.appendChild(cmd);
+  body.appendChild(line);
 
   const close = document.createElement('button');
   close.type = 'button';
@@ -89,13 +87,13 @@ function buildToast(lang) {
   close.setAttribute('aria-label', c.close);
 
   root.append(body, close);
-  return { root, body, close, line, attr };
+  return { root, body, close, line };
 }
 
 function showToast() {
   markShown();
 
-  const { root, body, close, line, attr } = buildToast(getLang());
+  const { root, body, close, line } = buildToast(getLang());
   document.body.appendChild(root);
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -117,8 +115,7 @@ function showToast() {
   // Keep it in step with the header toggle while it is on screen.
   const off = onLangChange((next) => {
     const c = copyFor(next);
-    line.textContent = c.line;
-    attr.textContent = c.attr;
+    line.firstChild.nodeValue = c.label;         // leave the <code> in place
     close.setAttribute('aria-label', c.close);
   });
   root.addEventListener('transitionend', () => { if (!root.isConnected) off(); });

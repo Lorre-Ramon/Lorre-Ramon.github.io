@@ -27,8 +27,12 @@ page that let a visitor discover the word "Kipling" without being told outright.
   phone, while `--ascii` is dimmed and set at `line-height: 1.05` for banners.
 - English in both locales. A translation would be a different poem; the zh path
   gets a one-line note rather than a rendering.
-- zh hint copy carries the Latin spelling "Rudyard Kipling" alongside 吉卜林 —
-  a reader given only the transliteration cannot type the command.
+- Toast copy reduced to `Try command: Kipling` / `试试命令：Kipling`, with the
+  command in mono so it reads as something typed. The longer quotation stays in
+  the console line and the HTML comment — those are the subtle hints; the toast
+  is the reward for reaching the bottom, so it says the thing outright.
+- The command stays Latin in both locales: a zh reader given only 吉卜林 has no
+  way to type it.
 - The toast opens the terminal but types nothing; finding the command is still
   the visitor's to do. It reuses `#terminal-trigger`'s own click handler rather
   than reaching into the Terminal instance.
