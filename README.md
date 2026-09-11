@@ -24,8 +24,7 @@ Everything that grows lives in `content/`. Add an entry once and it appears in
 |---|---|---|
 | A job | `content/site.en.json` + `content/site.zh.json` → `experience[]` | `#work`, `/work/<id>.md` |
 | A project | same files → `projects[]` | `#projects`, `/projects/<id>.md` |
-| A book | `content/shelf.json` → `books[]` | `#shelf`, `/shelf/<id>.md` |
-| A record | `content/shelf.json` → `music[]` | `#listening`, `/music/<id>.md` |
+| A record | `content/music.json` → `music[]` | `#listening`, `/music/<id>.md` |
 
 ### Album art
 
@@ -57,7 +56,8 @@ none — which makes it instant, free, and offline-capable. The virtual filesyst
 is generated from the same content JSON as the page, so `cat /work/apple.md`
 can never disagree with the card on the page.
 
-`help` lists commands. A few are not listed.
+`help` lists commands. A few are not listed — one of them is a poem, and
+three hints on the page point at it.
 
 ### If you ever want genuinely live data
 
@@ -91,9 +91,9 @@ and body line-height to `1.7`.
 ```
 index.html · 404.html
 assets/css/    tokens · base · layout · terminal
-assets/js/     i18n · render · main
-assets/js/terminal/   index (overlay) · shell (line editing) · commands · vfs · ascii
-content/       site.en.json · site.zh.json · shelf.json
+assets/js/     i18n · render · hint · main
+assets/js/terminal/   index (overlay) · shell (line editing) · commands · vfs · ascii · poem
+content/       site.en.json · site.zh.json · music.json
 architecture/  design docs, plans, session notes
 ```
 

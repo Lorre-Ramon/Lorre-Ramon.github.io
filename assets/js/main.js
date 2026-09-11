@@ -5,6 +5,7 @@
 import { initLang, getLang, setLang, toggleLang, onLangChange, loadContent } from './i18n.js';
 import { renderAll } from './render.js';
 import { initTerminal } from './terminal/index.js';
+import { initHint } from './hint.js';
 
 const THEME_KEY = 'bx.theme';
 
@@ -125,6 +126,7 @@ async function boot() {
   document.getElementById('lang-toggle')?.addEventListener('click', () => toggleLang());
 
   initTerminal();
+  initHint();
 }
 
 if (document.readyState === 'loading') {

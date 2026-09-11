@@ -42,7 +42,7 @@ export function neofetch(content, lang, extra = {}) {
     work: (content.experience ?? []).length,
     projects: (content.projects ?? []).length,
     research: (content.research ?? []).length,
-    shelf: (content.shelf ?? []).length,
+    records: (content.music ?? []).length,
   };
 
   const rows = [
@@ -59,7 +59,7 @@ export function neofetch(content, lang, extra = {}) {
     ['roles', String(counts.work)],
     ['projects', String(counts.projects)],
     ['research', String(counts.research)],
-    ['shelf', String(counts.shelf)],
+    ['records', String(counts.records)],
   ];
 
   const text = rows.map(([k, v]) => (v === '' ? k : `${k.padEnd(10)} ${v}`));

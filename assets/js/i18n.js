@@ -59,14 +59,14 @@ export async function loadContent(lang = current) {
   if (cache.has(lang)) return cache.get(lang);
 
   const promise = (async () => {
-    const [site, shelf] = await Promise.all([
+    const [site, records] = await Promise.all([
       fetch(`/content/site.${lang}.json`).then((r) => {
         if (!r.ok) throw new Error(`site.${lang}.json → ${r.status}`);
         return r.json();
       }),
-      fetch('/content/shelf.json').then((r) => (r.ok ? r.json() : {})),
+      fetch('/content/music.json').then((r) => (r.ok ? r.json() : {})),
     ]);
-    return { ...site, shelf: shelf.books ?? [], music: shelf.music ?? [] };
+    return { ...site, music: records.music ?? [] };
   })();
 
   cache.set(lang, promise);

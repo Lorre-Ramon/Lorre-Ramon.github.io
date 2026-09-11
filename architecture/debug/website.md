@@ -72,3 +72,26 @@ its start value. A probe element with `transition: none` and the same
 `background: var(--bg)` read `rgb(0, 0, 0)` immediately.
 **Heuristic**: if a computed style disagrees with its own custom property under
 headless, suspect a transition before suspecting the cascade.
+
+## 2026-09-10 — Terminal test assertions polluted by the output buffer
+**Issue**: Two end-to-end checks failed — "/shelf gone from vfs" and "neofetch
+shows records" — even though the `ls /` listing in the same failure message
+plainly showed no `shelf/` directory.
+**Root cause**: the assertions read `.term__output` in full, and the buffer
+still held the echo and error text of an earlier `run("shelf")`. The site was
+correct; the test was reading history.
+**Fix**: a `fresh(cmd)` helper that runs `clear` before each command so an
+assertion only ever sees the output it is about.
+**Validation**: 13/13 checks pass. Worth remembering — any assertion against
+this terminal must clear first, because output is append-only by design.
+
+## 2026-09-10 — Poem extraction off by one line
+**Issue**: Extracting the verse from the Wikisource HTML yielded 31 lines, not
+32, and the guard refused to write the file.
+**Root cause**: the extraction was anchored to a fixed offset (`lines[3:35]`)
+computed before a zero-width space was stripped. Removing it collapsed a line
+and shifted every index by one.
+**Fix**: anchor to the end instead — `lines[-32:]` — since the poem terminates
+the page. Kept the assertions on line count and final punctuation.
+**Validation**: 4 stanzas × 8 lines written; `node --check` parses; the rendered
+output was confirmed in a real browser.

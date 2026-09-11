@@ -1,5 +1,5 @@
 # Project: lorre-ramon.github.io — Personal Website
-Last Updated: 2026-09-09
+Last Updated: 2026-09-10
 
 ## Environment
 - No build step, no dependencies, no `package.json`. Plain HTML/CSS/ES modules.
@@ -21,6 +21,12 @@ Last Updated: 2026-09-09
 - No résumé page: removed at the user's request, along with the PDFs and every
   link to them. FIND's project copy still mentions "resume parsing" — that is
   product description, not a link.
+- No reading shelf: dropped 2026-09-10, along with its section, nav link,
+  renderer, `/shelf` VFS directory and `shelf` command. The listening section
+  is untouched; `content/shelf.json` was renamed `content/music.json`.
+- Second easter egg: a hidden `kipling` command prints Kipling's "If—".
+  Three hints point at it (HTML comment by the footer trigger, a console line,
+  and a toast once the visitor reaches the bottom).
 - Verified: 15/15 VFS unit assertions, 12/12 final regression checks, responsive
   at true 390/834/1440, dark mode, both locales.
 
@@ -30,8 +36,9 @@ enforced, `404.html` returns a real 404. Verified in production: ES module
 MIME types correct, content renders from JSON, `#terminal` deep link works cold.
 
 ### Not done
-- Shelf notes are descriptive (what each book is), not personal reactions.
 - No analytics, no custom domain. Repo has no description or homepage set.
+- The hint toast is not wired to the Konami/backtick entry points — only the
+  footer trigger, which it reuses by synthesising a click on it.
 
 ### Album art is hotlinked on purpose
 Cover images come from Apple's artwork CDN (`is1-ssl.mzstatic.com`) and each
@@ -63,6 +70,21 @@ iTunes Search API (no key); the exact command is in the README.
 - **Design tokens extracted, not eyeballed.** Values were mined from apple.com's
   production stylesheets. Four planning assumptions were measurably wrong; see
   `design/design-system.md`.
+
+- **The poem is a module constant, not content/.** `content/` is for things
+  that grow and must stay in sync across page + terminal + locales. "If—" is a
+  fixed asset with no locale variant, so it lives in
+  `assets/js/terminal/poem.js` — the same precedent as the banners in
+  `ascii.js`. It loads with the terminal graph, so visitors who never open the
+  terminal never download it.
+
+- **The hint toast needs two independent conditions, not one.** "Read to the
+  bottom" is tracked as `reachedEnd` (IntersectionObserver on `<footer>`) and
+  `dwelled` (a 14s timer), fired when both are true. A single observer-with-a-
+  time-check never fires for the common case of scrolling to the bottom early
+  and staying there, because the observer only reports *changes* in
+  intersection. Gating: `sessionStorage` for once-per-visit, `localStorage` for
+  "already ran the command, stop pointing at it".
 
 - **Vanilla over Astro.** No build step means push-to-deploy with no CI, no
   `node_modules`, and no version drift. Revisit only if a real blog with many
@@ -109,6 +131,17 @@ iTunes Search API (no key); the exact command is in the README.
 - **Block ASCII art needs `line-height` near 1.** At the 1.55 used for prose the
   rows do not fuse and the banner reads as broken rubble.
 
+- **Reproducing the poem verbatim trips the assistant's output content filter.**
+  Generating the 32 lines returned `400 Output blocked by content filtering
+  policy` — a false positive; the work is public domain (published 1910,
+  Kipling died 1936). The text was instead fetched from the Wikisource scan of
+  *Rewards and Fairies* by script and written straight to `poem.js`, so it never
+  passed through model output. If `poem.js` ever needs regenerating, expect the
+  same block and use the same route. The Wikisource page transcludes from the
+  `Page:` namespace, so `action=raw` returns only wikitext — use
+  `action=parse&prop=text` and anchor the extraction to the *last* 32 non-empty
+  lines rather than a fixed offset.
+
 - **`fetch()` fails under `file://`.** Opening index.html directly renders an
   empty page; `main.js` catches this and prints the fix.
 
@@ -121,9 +154,10 @@ iTunes Search API (no key); the exact command is in the README.
 
 ## Quick Reference
 - Content: `content/site.en.json`, `content/site.zh.json`,
-  `content/shelf.json` (holds both `books[]` and `music[]`)
+  `content/music.json` (holds `music[]` only since 2026-09-10)
 - Tokens: `assets/css/tokens.css` (provenance in `architecture/design/design-system.md`)
-- Terminal: `assets/js/terminal/{index,shell,commands,vfs,ascii}.js`
+- Terminal: `assets/js/terminal/{index,shell,commands,vfs,ascii,poem}.js`
+- Hint toast + console hint: `assets/js/hint.js` (exports `markPoemFound`,
+  imported by `commands.js` so running `kipling` silences the toast)
 - VFS is built by `buildVFS(content, lang)` in `vfs.js` — the single-source-of-truth seam
-- Résumé source: `resume.html`; PDFs regenerated via the Chrome command in README
 - GitHub: https://github.com/Lorre-Ramon · LinkedIn: eames-shi · FIND: find-internship.org

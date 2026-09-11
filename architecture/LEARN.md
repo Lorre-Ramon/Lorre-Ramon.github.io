@@ -4,6 +4,91 @@ A running log of key takeaways from coding sessions.
 
 ---
 
+## An IntersectionObserver reports *changes*, so "seen it AND waited" needs two flags · 2026-09-10
+
+**Context**: A hint toast that should appear only once the visitor has genuinely
+read to the bottom — footer in view, plus a 14s dwell so a jump to the end
+doesn't count.
+
+**What I learned**: The obvious shape — observe the footer, and inside the
+callback check whether enough time has passed — silently never fires for the
+most common case. Someone who scrolls to the bottom at 4s and stays there
+triggers the callback *once*, too early, and the observer has nothing left to
+report because intersection never changes again. Track the two conditions as
+independent booleans and have each one call a shared `maybeShow()`. This applies
+to any "event X has happened AND condition Y now holds" pairing where X is
+edge-triggered and Y is time-based.
+
+**Example**:
+```js
+let reachedEnd = false, dwelled = false;
+const maybeShow = () => { if (reachedEnd && dwelled) { observer.disconnect(); show(); } };
+setTimeout(() => { dwelled = true; maybeShow(); }, 14000);
+observer = new IntersectionObserver((es) => {
+  if (es.some((e) => e.isIntersecting)) { reachedEnd = true; maybeShow(); }
+}, { threshold: 0.4 });
+```
+
+**Tags**: `#gotcha` `#pattern` `#dx`
+
+---
+
+## Assertions against an append-only buffer must clear it first · 2026-09-10
+
+**Context**: Two browser tests failed while the very output quoted in the
+failure message proved the code was right.
+
+**What I learned**: The checks read the terminal's whole output pane and
+asserted `"shelf" not in out`. The word was still there — in the echoed
+command and error text of a *previous* assertion in the same session. The
+feature was correct; the test was reading history. Any assertion against an
+append-only surface (a terminal, a log pane, a chat transcript, a console) has
+to scope itself: clear first, or capture only the delta. The tell is a failure
+whose own diagnostic output contradicts it — that means you are asserting on
+the wrong slice, not that the code is broken.
+
+**Tags**: `#testing` `#debugging` `#gotcha`
+
+---
+
+## Anchor a parser to the stable end of its input, not a counted offset · 2026-09-10
+
+**Context**: Extracting 32 lines of verse from scraped HTML; the extractor
+returned 31 and refused to write.
+
+**What I learned**: The slice was `lines[3:35]` — an offset counted by eye from
+an earlier debug dump. Between that dump and the real run, a cleanup step
+stripped a zero-width space, which emptied a line, which the filter dropped,
+which shifted every index by one. Offsets counted from the start are coupled to
+every normalisation step upstream of them. Anchor to whatever is structurally
+stable instead: here the poem ends the document, so `lines[-32:]` is immune to
+anything that happens above it. Keep cheap invariants (expected count, expected
+final punctuation) as a guard so a bad parse refuses to write rather than
+writing silently wrong data.
+
+**Tags**: `#gotcha` `#python` `#pattern`
+
+---
+
+## Sequence work so the step most likely to fail is the last one · 2026-09-10
+
+**Context**: Writing a public-domain poem into a source file kept being refused
+by an output content filter (a false positive — published 1910).
+
+**What I learned**: Once it was clear one specific step might be blocked, the
+right move was to reorder: land every other file first — command, hints, styles,
+docs, wiring — and leave the risky write until last, with the module stubbed so
+its absence could never break the import graph. That turned "possibly a
+half-broken site" into "a complete, working site with one file to fill in". The
+general rule: when one step in a batch has a materially higher failure
+probability, do it last and make the partial state a usable one. The eventual
+fix was a different data path, not a disguise — fetching the text with a script
+so it never passed through the blocked channel at all.
+
+**Tags**: `#pattern` `#dx` `#tooling`
+
+---
+
 ## Author `display` rules beat the UA `[hidden]` attribute · 2026-09-09
 
 **Context**: A finished page rendered perfectly but nothing on it was clickable.

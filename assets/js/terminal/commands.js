@@ -6,6 +6,8 @@
 
 import { normalize, resolve, listDir, renderTree } from './vfs.js';
 import { BANNER, BANNER_COMPACT, neofetch, COFFEE, MATRIX_CHARS } from './ascii.js';
+import { render as renderPoem } from './poem.js';
+import { markPoemFound } from '../hint.js';
 
 const T = {
   noSuchFile: { en: (p) => `cat: ${p}: No such file or directory`,
@@ -118,10 +120,6 @@ export const commands = {
     desc: { en: 'education', zh: '教育背景' },
     run: (ctx) => summarize(ctx, 'education'),
   },
-  shelf: {
-    desc: { en: 'what I am reading', zh: '书架' },
-    run: (ctx) => summarize(ctx, 'shelf'),
-  },
   music: {
     desc: { en: 'what I am listening to', zh: '唱片' },
     run: (ctx) => summarize(ctx, 'music'),
@@ -211,6 +209,20 @@ export const commands = {
     }),
   },
 
+  /* Three hints point here: the comment in the footer source, a line in the
+     console, and the toast that surfaces once you've read to the bottom.
+     Printed as a plain string — .term__line is already pre-wrap, so the line
+     breaks survive and long lines still wrap on a phone. */
+  kipling: {
+    hidden: true,
+    desc: { en: '', zh: '' },
+    run(ctx) {
+      markPoemFound();          // stop the toast nagging someone who found it
+      // The poem is the English; a translation would be a different poem.
+      return renderPoem() + (ctx.lang === 'zh' ? '\n\n（原文照录。）' : '');
+    },
+  },
+
   credits: {
     hidden: true,
     desc: { en: '', zh: '' },
@@ -251,8 +263,12 @@ export function commandNames({ includeHidden = false } = {}) {
     .map(([name]) => name);
 }
 
+/* Dispatch is case-sensitive, as a shell should be. The one exception: the
+   hint names a surname, so `Kipling` is what people actually type. */
+const ALIASES = { Kipling: 'kipling', KIPLING: 'kipling' };
+
 export function lookup(name) {
-  return commands[name] ?? null;
+  return commands[name] ?? commands[ALIASES[name]] ?? null;
 }
 
 export const notFoundMessage = (name, lang) => t('notFound', lang, name);

@@ -89,14 +89,6 @@ export function buildVFS(content, lang) {
   const education = add(root, dir('education'));
   (content.education ?? []).forEach((s) => add(education, schoolFile(s)));
 
-  const shelf = add(root, dir('shelf'));
-  (content.shelf ?? []).forEach((b) => {
-    const title = b.title?.[lang] ?? b.title?.en ?? b.id;
-    const author = b.author?.[lang] ?? b.author?.en ?? '';
-    const note = b.note?.[lang] ?? b.note?.en ?? '';
-    add(shelf, file(`${b.id}.md`, `${title}\n${'='.repeat(40)}\n${author}\n\n${note}`));
-  });
-
   const music = add(root, dir('music'));
   (content.music ?? []).forEach((m) => {
     const work = m.work?.[lang] ?? m.work?.en ?? m.id;

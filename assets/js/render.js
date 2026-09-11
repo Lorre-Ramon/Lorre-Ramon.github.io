@@ -147,23 +147,6 @@ export function renderSkills(node, groups) {
   });
 }
 
-export function renderShelf(node, items, lang) {
-  clear(node);
-  if (!items.length) {
-    node.appendChild(el('p', 't-secondary',
-      lang === 'zh' ? '还没有条目。' : 'Nothing here yet.'));
-    return;
-  }
-  items.forEach((book) => {
-    const row = el('div', 'shelf__item reveal');
-    row.appendChild(el('div', 'shelf__title', book.title?.[lang] ?? book.title?.en ?? ''));
-    row.appendChild(el('div', 'shelf__author', book.author?.[lang] ?? book.author?.en ?? ''));
-    const note = book.note?.[lang] ?? book.note?.en;
-    if (note) row.appendChild(el('p', 'shelf__note', note));
-    node.appendChild(row);
-  });
-}
-
 /**
  * Album grid. Cover art is hotlinked from Apple's CDN and each tile links to
  * the record: the images are copyrighted, so they are shown in the context of
@@ -216,7 +199,6 @@ export function renderAll(content, lang) {
   renderProjects(at('projects-list'), content.projects ?? [], lang);
   renderResearch(at('research-list'), content.research ?? [], lang);
   renderSkills(at('skills-list'), content.skills ?? []);
-  renderShelf(at('shelf-list'), content.shelf ?? [], lang);
   renderMusic(at('music-list'), content.music ?? [], lang);
   renderContact(at('contact-links'), content.profile?.links ?? []);
 }
